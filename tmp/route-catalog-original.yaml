@@ -1,0 +1,34 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    maistra.io/original-host: catalog.istioinaction.io
+  creationTimestamp: "2022-04-22T17:12:51Z"
+  labels:
+    maistra.io/gateway-name: catalog-gateway
+    maistra.io/gateway-namespace: istioinaction
+    maistra.io/gateway-resourceVersion: "110385226"
+    maistra.io/generated-by: ior
+  name: istioinaction-catalog-gateway-7f963362512a77a1
+  namespace: istio-system
+  resourceVersion: "110385319"
+  uid: cf6a0dd2-baec-4d61-83f8-3e891422c0d3
+spec:
+  host: catalog.istioinaction.io
+  port:
+    targetPort: http2
+  to:
+    kind: Service
+    name: istio-ingressgateway
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: "2022-04-22T17:12:53Z"
+      status: "True"
+      type: Admitted
+    host: catalog.istioinaction.io
+    routerCanonicalHostname: router-default.apps.wkshop.rhbr-lab.com
+    routerName: default
+    wildcardPolicy: None
