@@ -5,14 +5,14 @@ metadata:
   name: coolstore-gateway
 spec:
   selector:
-    istio: shard-ingressgateway
+    istio: ingressgateway # use istio default controller
   servers:
   - port:
       number: 80
       name: http
       protocol: HTTP
     hosts:
-    - "webapp.shard.io"
+    - "webapp.istioinaction.io"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -20,7 +20,7 @@ metadata:
   name: webapp-virtualservice
 spec:
   hosts:
-  - "webapp.shard.io"
+  - "webapp.istioinaction.io"
   gateways:
   - coolstore-gateway
   http:
