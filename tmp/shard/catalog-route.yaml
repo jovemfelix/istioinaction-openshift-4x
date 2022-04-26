@@ -1,6 +1,8 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
+  annotations:
+    cert-utils-operator.redhat-cop.io/certs-from-secret: istioinaction/shard-credential
   labels:
     type: infra-shard
   name: shard-catalog-gateway
@@ -13,4 +15,6 @@ spec:
     kind: Service
     name: istio-ingressgateway
     weight: 100
+  tls:
+    termination: edge
   wildcardPolicy: None

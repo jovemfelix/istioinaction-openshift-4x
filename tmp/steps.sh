@@ -52,6 +52,7 @@ f tmp/shard/
 export S=catalog.shard.io
 curl -H "Host: ${S}" --resolve "${S}:${INGRESS_PORT}:${INGRESS_HOST}" "http://${S}:${INGRESS_PORT}/items"
 curl -H "Host: ${S}" --resolve "${S}:${INGRESS_PORT}:${INGRESS_HOST_SHARD}" "http://${S}:${INGRESS_PORT}/items"
+curl -H "Host: ${S}" --resolve "${S}:${SECURE_INGRESS_PORT}:${INGRESS_HOST_SHARD}" "http://${S}:${SECURE_INGRESS_PORT}/items" -k
 
 ## test using route shard WITH HTTPD
 export T=httpd.shard.io
@@ -61,3 +62,14 @@ curl -IH "Host: ${T}" --resolve "${T}:${INGRESS_PORT}:${INGRESS_HOST_SHARD}" "ht
 
 oc policy add-role-to-user admin system:serviceaccount:${NS}:default -n app-shard
 oc policy add-role-to-user view -z default
+
+### keys
+DOMAIN=shard.io
+MY_HOST_INTERNAL=catalog.shard.io
+APP=teste1
+SECRET=shard-credential
+
+sh ../generate-keys.sh ${DOMAIN} ${MY_HOST_INTERNAL} ${APP}
+oc create -n ${SMCP_NAMESPACE} secret tls ${SECRET} --key=keys/${MY_HOST_INTERNAL}.key --cert=keys/${MY_HOST_INTERNAL}.crt
+oc create -n ${NS} secret tls ${SECRET} --key=keys/${MY_HOST_INTERNAL}.key --cert=keys/${MY_HOST_INTERNAL}.crt
+oc delete secret ${SECRET} -n ${SMCP_NAMESPACE}

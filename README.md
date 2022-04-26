@@ -28,11 +28,12 @@ Error: Istio present but verify-install needs an IstioOperator or manifest for c
 ````
 # Deploying your first application in the service mesh
 ````shell script
-$ export NS=istioinaction
-$ export SMCP_NAMESPACE=istio-system
-$ export SMCP_NAME=$(oc get smcp -n ${SMCP_NAMESPACE} -o jsonpath={.items..metadata.name})
-$ export INGRESS_HOST_SHARD=10.36.5.10
-$ export INGRESS_PORT=80
+export NS=istioinaction
+export SMCP_NAMESPACE=istio-system
+export SMCP_NAME=$(oc get smcp -n ${SMCP_NAMESPACE} -o jsonpath={.items..metadata.name})
+export INGRESS_HOST_SHARD=10.36.5.100
+export INGRESS_PORT=80
+export SECURE_INGRESS_PORT=443
 ````
 
 
