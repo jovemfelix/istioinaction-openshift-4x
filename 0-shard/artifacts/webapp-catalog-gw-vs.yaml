@@ -5,7 +5,7 @@ metadata:
   name: coolstore-gateway
 spec:
   selector:
-    istio: ingressgateway # use istio default controller
+    istio: shard-ingressgateway
   servers:
   - port:
       number: 80

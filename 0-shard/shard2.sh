@@ -38,4 +38,8 @@ while sleep .5; do \
 for i in {1..100}; do curl -s -H "Host: ${W}" --resolve "${W}:${INGRESS_PORT}:${INGRESS_HOST}" "http://${W}:${INGRESS_PORT}/api/catalog" \ -H "Host: ${W}" \
 | grep -i imageUrl; done | wc -l
 
+
+for i in {1..100}; do curl -s -H "Host: ${W}" --resolve "${W}:${INGRESS_PORT}:${INGRESS_HOST_SHARD}" "http://${W}:${INGRESS_PORT}/api/catalog" \ -H "Host: ${W}" \
+| grep -i imageUrl; done | wc -l
+
 # 145
